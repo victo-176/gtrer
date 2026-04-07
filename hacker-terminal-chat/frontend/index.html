@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>HACK://TERMINAL</title>
+  <link rel="stylesheet" href="css/terminal.css">
+</head>
+<body>
+  <div class="terminal">
+    <!-- Auth Screen -->
+    <div id="auth-screen" class="screen active">
+      <div class="glitch-wrapper">
+        <h1 class="glitch" data-text="HACK://TERMINAL">HACK://TERMINAL</h1>
+      </div>
+      <div id="auth-forms">
+        <div class="form-container" id="login-container">
+          <input type="email" id="login-email" placeholder="> EMAIL" class="terminal-input" autocomplete="off">
+          <input type="password" id="login-password" placeholder="> PASSWORD" class="terminal-input">
+          <button id="login-btn" class="terminal-btn">LOGIN</button>
+          <button id="show-register-btn" class="terminal-btn secondary">NEW OPERATIVE</button>
+        </div>
+        <div id="register-container" class="form-container hidden">
+          <input type="email" id="reg-email" placeholder="> EMAIL" class="terminal-input">
+          <input type="password" id="reg-password" placeholder="> PASSWORD" class="terminal-input">
+          <input type="password" id="reg-confirm" placeholder="> CONFIRM PASSWORD" class="terminal-input">
+          <button id="register-btn" class="terminal-btn">INITIALIZE</button>
+          <button id="back-to-login" class="terminal-btn secondary">BACK</button>
+        </div>
+      </div>
+      <div class="admin-corner">
+        <button id="admin-toggle" class="admin-link">Admin?</button>
+        <div id="admin-password-panel" class="hidden">
+          <input type="password" id="admin-password" placeholder="ADMIN KEY" class="terminal-input small">
+          <button id="admin-login-btn" class="terminal-btn small">></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chat Screen -->
+    <div id="chat-screen" class="screen">
+      <div class="chat-header">
+        <div class="user-info">
+          <span id="current-username">[USER]</span>
+          <span id="user-rank" class="rank-badge">INITIATE</span>
+          <span id="user-points">0 pts</span>
+        </div>
+        <div class="header-controls">
+          <button id="profile-btn" class="icon-btn">[PROFILE]</button>
+          <button id="logout-btn" class="icon-btn">[LOGOUT]</button>
+          <button id="admin-panel-btn" class="icon-btn hidden">[ADMIN]</button>
+        </div>
+      </div>
+      <div id="chat-messages" class="chat-log"></div>
+      <div id="typing-indicator" class="typing-indicator hidden"></div>
+      <div class="chat-input-area">
+        <span class="prompt">></span>
+        <input type="text" id="message-input" class="terminal-input chat-input" placeholder="Enter message (/dm user msg)..." autocomplete="off" autofocus>
+        <button id="send-btn" class="terminal-btn">SEND</button>
+      </div>
+    </div>
+
+    <!-- Admin Screen -->
+    <div id="admin-screen" class="screen">
+      <div class="admin-header">
+        <h2>ADMIN://DASHBOARD</h2>
+        <button id="admin-back" class="terminal-btn">[EXIT]</button>
+      </div>
+      <div class="admin-tabs">
+        <button class="tab-btn active" data-tab="users">USERS</button>
+        <button class="tab-btn" data-tab="messages">MESSAGES</button>
+        <button class="tab-btn" data-tab="reports">REPORTS</button>
+        <button class="tab-btn" data-tab="tasks">TASKS</button>
+      </div>
+      <div id="admin-content" class="admin-content"></div>
+    </div>
+
+    <!-- Profile Modal -->
+    <div id="profile-modal" class="modal hidden">
+      <div class="modal-content terminal-panel">
+        <h3>PROFILE://<span id="profile-username"></span></h3>
+        <div class="profile-avatar">
+          <img id="profile-avatar-img" src="" alt="avatar" style="max-width:100px;max-height:100px;">
+          <input type="file" id="avatar-upload" accept="image/*" class="hidden">
+          <button id="change-avatar-btn" class="terminal-btn small">[UPLOAD]</button>
+        </div>
+        <p>RANK: <span id="profile-rank"></span></p>
+        <p>POINTS: <span id="profile-points"></span></p>
+        <p>TASKS COMPLETED: <span id="profile-tasks"></span></p>
+        <button id="close-profile" class="terminal-btn">CLOSE</button>
+      </div>
+    </div>
+  </div>
+
+  <audio id="message-sound" src="assets/message.mp3" preload="auto"></audio>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/chat.js"></script>
+  <script src="js/admin.js"></script>
+  <script src="js/socket.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
