@@ -1,19 +1,34 @@
 const rateLimit = require('express-rate-limit');
 
-// General auth rate limiter (login/register/admin-verify)
 const authRateLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 10, // limit each IP to 10 requests per windowMs
-  message: { error: 'Too many authentication attempts. Try again later.' },
+  windowMs: 15 * 60 * 1000,
+  max: 20,
+  message: {
+    error: 'Too many authentication attempts. Please try again later.'
+  },
   standardHeaders: true,
   legacyHeaders: false,
+  skipSuccessfulRequests: false
 });
 
-// Stricter limiter for admin verification
 const adminVerifyLimiter = rateLimit({
-  windowMs: 5 * 60 * 1000, // 5 minutes
+  windowMs: 5 * 60 * 1000,
   max: 5,
-  message: { error: 'Too many admin verification attempts. Access blocked temporarily.' },
+  message: {
+    error: 'Too many admin verification attempts. Access blocked temporarily.'
+  },
+  standardHeaders: true,
+  legacyHeaders: false
 });
 
-module.exports = { authRateLimiter, adminVerifyLimiter };
+const apiLimiter = rateLimit({
+  windowMs: 1 * 60 * 1000,
+  max: 100,
+  message: {
+    error: 'Too many requests. Slow down.'
+  },
+  standardHeaders: true,
+  legacyHeaders: false
+});
+
+module.exports = { authRateLimiter, adminVerifyLimiter, apiLimiter };
